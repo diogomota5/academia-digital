@@ -1,0 +1,4 @@
+package com.academiadigital.Controller;
+
+public class AvaliacaoFisicaController {
+}
