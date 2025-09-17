@@ -5,6 +5,7 @@ import com.academiadigital.Entity.Form.MatriculaForm;
 import com.academiadigital.Entity.Matricula;
 import com.academiadigital.Repository.AlunoRepository;
 import com.academiadigital.Repository.MatriculaRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,11 +34,11 @@ public class MatriculaService {
         return matriculaRepository.save(matricula);
     }
 
-    public Matricula findByid(Long id){
-        return matriculaRepository.findById(id).get();
+    public Optional<Matricula> findById(Long id){
+        return matriculaRepository.findById(id);
     }
 
-    List<Matricula> findAll(String bairro){
+    public List<Matricula> findAll(String bairro){
         if(bairro == null){
             return matriculaRepository.findAll();
         } else {

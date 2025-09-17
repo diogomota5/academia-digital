@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class AvaliacaoFisicaService {
 
-    private AvaliacaoFisicaRepository avaliacaoFisicaRepository;
+    private static AvaliacaoFisicaRepository avaliacaoFisicaRepository;
 
     private AlunoRepository alunoRepository;
 
@@ -36,16 +36,16 @@ public class AvaliacaoFisicaService {
         return avaliacaoFisicaRepository.save(avaliacaoFisica);
     }
 
-    public Optional<AvaliacaoFisica> findById(Long id){
-        return avaliacaoFisicaRepository.findById(id);
+    public static Optional<AvaliacaoFisica> findById(Long alunoId){
+        return avaliacaoFisicaRepository.findById(alunoId);
     }
 
     public List<AvaliacaoFisica> findAll(){
         return avaliacaoFisicaRepository.findAll();
     }
 
-    public AvaliacaoFisica update(Long id, AvaliacaoFisicaUpdateForm avaliacaoFisicaUpdateForm){
-        Optional<AvaliacaoFisica> avaliacaoFisica = avaliacaoFisicaRepository.findById(id);
+    public AvaliacaoFisica update(Long alunoId, AvaliacaoFisicaUpdateForm avaliacaoFisicaUpdateForm){
+        Optional<AvaliacaoFisica> avaliacaoFisica = avaliacaoFisicaRepository.findById(alunoId);
         if(avaliacaoFisica.isPresent()){
             AvaliacaoFisica avaliacaoFisicaUpdate = avaliacaoFisica.get();
             avaliacaoFisicaUpdate.setPeso(avaliacaoFisicaUpdateForm.getPeso());
@@ -53,12 +53,12 @@ public class AvaliacaoFisicaService {
 
             return avaliacaoFisicaRepository.save(avaliacaoFisicaUpdate);
         } else {
-            throw new RuntimeException("Objeto com o ID " + id + " não foi encontrado");
+            throw new RuntimeException("Objeto com o ID " + alunoId + " não foi encontrado");
         }
     }
 
-    public void delete(Long id){
-        avaliacaoFisicaRepository.deleteById(id);
+    public void delete(Long alunoId){
+        avaliacaoFisicaRepository.deleteById(alunoId);
     }
 
 }
