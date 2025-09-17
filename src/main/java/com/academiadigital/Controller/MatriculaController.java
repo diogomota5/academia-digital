@@ -29,8 +29,8 @@ public class MatriculaController {
     }
 
     @GetMapping
-    public List<Matricula> findAll(String bairro) {
-        return matriculaService.findAll(bairro);
+    public List<Matricula> findAll() {
+        return matriculaService.findAll();
     }
 
     @GetMapping("/{id}")

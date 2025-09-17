@@ -6,6 +6,7 @@ import com.academiadigital.Entity.Form.AlunoForm;
 import com.academiadigital.Entity.Form.AlunoUpdateForm;
 import com.academiadigital.Service.AlunoService;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class AlunoController {
    }
 
     @PostMapping
-    public Aluno create(@RequestBody AlunoForm alunoForm){
+    public Aluno create(@Valid @RequestBody AlunoForm alunoForm){
        return alunoService.createAluno(alunoForm);
     }
 
@@ -41,8 +42,8 @@ public class AlunoController {
     }
 
     @GetMapping
-    public List<Aluno> findAll(){
-       return alunoService.findAll();
+    public List<Aluno> findAll(@RequestParam(value = "dataDeNascimento", required = false) String dataDeNascimento){
+       return alunoService.findAll(dataDeNascimento);
     }
 
     @GetMapping("/{id}")

@@ -4,12 +4,14 @@ import com.academiadigital.Entity.Aluno;
 import com.academiadigital.Entity.AvaliacaoFisica;
 import com.academiadigital.Entity.Form.AlunoForm;
 import com.academiadigital.Entity.Form.AlunoUpdateForm;
+import com.academiadigital.Infra.Utils.JavaTimeUtils;
 import com.academiadigital.Repository.AlunoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,8 +39,13 @@ public class AlunoService {
         return alunoRepository.findById(id);
     }
 
-    public List<Aluno> findAll(){
-        return alunoRepository.findAll();
+    public List<Aluno> findAll(String dataDeNascimento){
+        if(dataDeNascimento == null){
+            return alunoRepository.findAll();
+        } else {
+            LocalDate localDate = LocalDate.parse(dataDeNascimento, JavaTimeUtils.LOCAL_DATE_FORMATTER);
+            return alunoRepository.findByDataDeNascimento(localDate);
+        }
     }
 
     public Aluno updateAluno(Long id, AlunoUpdateForm updateForm){

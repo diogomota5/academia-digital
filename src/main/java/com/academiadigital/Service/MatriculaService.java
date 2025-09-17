@@ -38,12 +38,8 @@ public class MatriculaService {
         return matriculaRepository.findById(id);
     }
 
-    public List<Matricula> findAll(String bairro){
-        if(bairro == null){
+    public List<Matricula> findAll(){
             return matriculaRepository.findAll();
-        } else {
-            return matriculaRepository.findAlunosMatriculadosBairro(bairro);
-        }
     }
 
     public void delete(Long id){
